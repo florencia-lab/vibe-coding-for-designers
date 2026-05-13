@@ -25,45 +25,27 @@ export default function Home() {
         {/* ── Dark hero ─────────────────────────────────────────────────── */}
         <div className="relative flex flex-col min-h-screen bg-[#0f0f0f] px-5">
 
-          {/* Header inside hero */}
-          <header className="flex items-center justify-between h-14 max-w-4xl w-full mx-auto shrink-0">
-            <div className="flex items-center gap-2.5">
-              <div className="w-6 h-6 rounded-md bg-[#aba9f0] flex items-center justify-center">
-                <span className="text-white text-[11px] font-bold leading-none">DS</span>
-              </div>
-              <span className="text-[14px] font-semibold text-white/80">Devsign</span>
-            </div>
-            <nav className="hidden md:flex items-center gap-1">
-              {["Git", "Deploy", "Security", "Cheat Sheet"].map((label) => {
-                const s = sections.find((s) => s.title.includes(label.split(" ")[0]))
-                return s ? (
-                  <a
-                    key={label}
-                    href={`#${s.id}`}
-                    className="text-[13px] text-white/30 hover:text-white/70 px-3 py-1.5 rounded-lg transition-colors"
-                  >
-                    {label}
-                  </a>
-                ) : null
-              })}
-            </nav>
-          </header>
-
           {/* Centered content */}
-          <div className="flex-1 flex flex-col items-center justify-center gap-10 pb-16 -mt-4">
-            <div className="text-center space-y-3">
+          <div className="flex-1 flex flex-col items-center justify-center gap-12 pb-16 -mt-4">
+            <div className="text-center space-y-6">
               <p className="text-[11px] font-semibold tracking-[0.14em] text-[#aba9f0] uppercase">
                 A guide by capicua
               </p>
-              <h1 className="text-3xl sm:text-5xl font-light text-white tracking-tight">
-                Where should we begin?
+              <h1 className="text-5xl sm:text-7xl leading-[1.1] tracking-tight">
+                <span className="block text-white font-light">Your first git push</span>
+                <span
+                  className="block text-[#aba9f0]"
+                  style={{ fontFamily: "var(--font-lora)", fontStyle: "italic", fontWeight: 400 }}
+                >
+                  should not be your last.
+                </span>
               </h1>
-              <p className="text-[15px] text-white/30 font-light">
-                Your first git push should not be your last.
-              </p>
             </div>
 
-            <HeroInput />
+            <div className="flex flex-col items-center gap-3">
+              <p className="text-[13px] text-white/30 tracking-wide">Where should we begin?</p>
+              <HeroInput />
+            </div>
           </div>
 
           {/* Scroll hint */}
