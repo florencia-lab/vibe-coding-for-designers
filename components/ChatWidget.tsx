@@ -1,9 +1,10 @@
 "use client"
 
 import { useChat } from "@ai-sdk/react"
-import { TextStreamChatTransport, type UIMessage } from "ai"
+import { useChatContext } from "@/lib/chat-context"
+import { type UIMessage } from "ai"
 import { MessageCircle, X, Send, Loader2, Bot } from "lucide-react"
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 function getMessageText(message: UIMessage): string {
   return message.parts
@@ -12,21 +13,13 @@ function getMessageText(message: UIMessage): string {
     .join("")
 }
 
-const SUGGESTIONS = [
-  "What's the difference between commit and push?",
-  "How do I store my API key safely?",
-  "What tool should I start with as a designer?",
-]
-
 export function ChatWidget() {
-  const [open, setOpen] = useState(false)
+  const { chat, open, setOpen } = useChatContext()
   const [input, setInput] = useState("")
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const transport = useMemo(() => new TextStreamChatTransport({ api: "/api/chat" }), [])
-  const { messages, sendMessage, status } = useChat({ transport })
-
+  const { messages, sendMessage, status } = useChat({ chat })
   const isLoading = status === "submitted" || status === "streaming"
 
   useEffect(() => {
@@ -34,7 +27,7 @@ export function ChatWidget() {
   }, [messages, isLoading])
 
   useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 100)
+    if (open) setTimeout(() => inputRef.current?.focus(), 150)
   }, [open])
 
   function handleSend(text: string) {
@@ -45,9 +38,9 @@ export function ChatWidget() {
 
   return (
     <>
-      {/* Floating button */}
+      {/* Floating button — only shown after the user has scrolled past hero */}
       <button
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => setOpen(!open)}
         className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 bg-[#1b1b1b] hover:bg-[#2d2d2d] text-white rounded-full px-5 py-3 shadow-xl transition-all duration-200 hover:scale-105 active:scale-95"
         aria-label="Ask a question"
       >
@@ -63,14 +56,22 @@ export function ChatWidget() {
           h-[85vh] sm:h-[600px]`}
       >
         {/* Header */}
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-gray-100 shrink-0">
-          <div className="w-8 h-8 rounded-full bg-[#aba9f0] flex items-center justify-center shrink-0">
-            <Bot size={16} className="text-white" />
+        <div className="flex items-center justify-between gap-3 px-5 py-4 border-b border-gray-100 shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-[#aba9f0] flex items-center justify-center shrink-0">
+              <Bot size={16} className="text-white" />
+            </div>
+            <div>
+              <p className="text-[14px] font-semibold text-[#1b1b1b]">Ask Claude</p>
+              <p className="text-[12px] text-[#888] leading-none mt-0.5">Your Devsign guide is loaded</p>
+            </div>
           </div>
-          <div>
-            <p className="text-[14px] font-semibold text-[#1b1b1b]">Ask Claude</p>
-            <p className="text-[12px] text-[#888] leading-none mt-0.5">Your Devsign guide is loaded</p>
-          </div>
+          <button
+            onClick={() => setOpen(false)}
+            className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-[#999]"
+          >
+            <X size={15} />
+          </button>
         </div>
 
         {/* Messages */}
@@ -80,21 +81,10 @@ export function ChatWidget() {
               <div className="w-12 h-12 rounded-2xl bg-[#f0efff] flex items-center justify-center mb-3">
                 <MessageCircle size={22} className="text-[#aba9f0]" />
               </div>
-              <p className="text-[14px] font-medium text-[#1b1b1b] mb-1">Got a question?</p>
+              <p className="text-[14px] font-medium text-[#1b1b1b] mb-1">Waiting for your question</p>
               <p className="text-[13px] text-[#888] leading-relaxed">
                 Ask anything — git, deployment, security, or how to turn your Figma designs into real products.
               </p>
-              <div className="mt-5 flex flex-col gap-2 w-full">
-                {SUGGESTIONS.map((q) => (
-                  <button
-                    key={q}
-                    onClick={() => handleSend(q)}
-                    className="text-left text-[13px] text-[#555] bg-[#f7f6ff] hover:bg-[#eeeeff] border border-[#e8e7ff] rounded-xl px-3.5 py-2.5 transition-colors"
-                  >
-                    {q}
-                  </button>
-                ))}
-              </div>
             </div>
           )}
 
@@ -145,9 +135,9 @@ export function ChatWidget() {
           )}
 
           {status === "error" && (
-            <div className="text-[13px] text-red-500 text-center py-2">
+            <p className="text-[13px] text-red-500 text-center py-2">
               Something went wrong. Check your API key and try again.
-            </div>
+            </p>
           )}
 
           <div ref={bottomRef} />
