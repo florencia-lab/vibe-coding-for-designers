@@ -26,12 +26,12 @@ export default function Home() {
         <div className="relative flex flex-col min-h-screen bg-[#0f0f0f] px-5">
 
           {/* Centered content */}
-          <div className="flex-1 flex flex-col items-center justify-center gap-12 pb-16 -mt-4">
+          <div className="flex-1 flex flex-col items-center justify-center gap-12 pb-16 pt-16">
             <div className="text-center space-y-6">
               <p className="text-[11px] font-semibold tracking-[0.14em] text-[#aba9f0] uppercase">
                 A guide by capicua
               </p>
-              <h1 className="text-5xl sm:text-7xl leading-[1.1] tracking-tight">
+              <h1 className="text-[40px] sm:text-[56px] leading-[1.15] tracking-tight">
                 <span className="block text-white font-light">Your first git push</span>
                 <span
                   className="block text-[#aba9f0]"
