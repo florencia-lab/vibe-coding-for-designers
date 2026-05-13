@@ -23,9 +23,9 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-6 h-6 rounded-md bg-[#aba9f0] flex items-center justify-center">
-              <span className="text-white text-[11px] font-bold leading-none">VC</span>
+              <span className="text-white text-[11px] font-bold leading-none">DS</span>
             </div>
-            <span className="text-[14px] font-semibold text-[#1b1b1b]">Vibe Coding for Designers</span>
+            <span className="text-[14px] font-semibold text-[#1b1b1b]">Devsign</span>
           </div>
           <nav className="hidden md:flex items-center gap-1">
             {["Git", "Deploy", "Security", "Cheat Sheet"].map((label) => {
@@ -51,10 +51,10 @@ export default function Home() {
             A guide by capicua
           </p>
           <h1 className="text-4xl sm:text-6xl font-normal text-[#1b1b1b] leading-[1.05] tracking-tight mb-5">
-            Vibe Coding<br />for Designers
+            Welcome,<br />Devsigner
           </h1>
           <p className="text-lg sm:text-xl font-light text-[#3d3b8a] max-w-xl leading-relaxed">
-            Everything you need to go from Figma file to live URL — without a computer science degree.
+            Your first git push should not be your last.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
@@ -148,9 +148,8 @@ export default function Home() {
         {/* Footer */}
         <div className="text-center pt-8 pb-4">
           <p className="text-[13px] text-[#aaa]">
-            Made with{" "}
-            <span className="text-[#aba9f0]">♥</span>
-            {" "}by{" "}
+            <span className="text-[#aba9f0] font-semibold">Devsign</span>
+            {" "}— made with ♥ by{" "}
             <a href="https://capicua.com" className="hover:text-[#666] transition-colors">
               capicua
             </a>

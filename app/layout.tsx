@@ -9,12 +9,11 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Vibe Coding for Designers",
-  description:
-    "Everything you need to go from Figma file to live URL — without a computer science degree.",
+  title: "Devsign",
+  description: "Your first git push should not be your last.",
   openGraph: {
-    title: "Vibe Coding for Designers",
-    description: "A survival guide for building with AI — without breaking things.",
+    title: "Devsign",
+    description: "Your first git push should not be your last.",
   },
 }
 

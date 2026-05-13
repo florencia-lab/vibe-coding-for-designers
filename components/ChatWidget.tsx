@@ -69,7 +69,7 @@ export function ChatWidget() {
           </div>
           <div>
             <p className="text-[14px] font-semibold text-[#1b1b1b]">Ask Claude</p>
-            <p className="text-[12px] text-[#888] leading-none mt-0.5">Your vibe coding guide is loaded</p>
+            <p className="text-[12px] text-[#888] leading-none mt-0.5">Your Devsign guide is loaded</p>
           </div>
         </div>
 
@@ -82,7 +82,7 @@ export function ChatWidget() {
               </div>
               <p className="text-[14px] font-medium text-[#1b1b1b] mb-1">Got a question?</p>
               <p className="text-[13px] text-[#888] leading-relaxed">
-                Ask anything about vibe coding, git, deployment, or how to turn your Figma designs into real products.
+                Ask anything — git, deployment, security, or how to turn your Figma designs into real products.
               </p>
               <div className="mt-5 flex flex-col gap-2 w-full">
                 {SUGGESTIONS.map((q) => (
@@ -161,7 +161,7 @@ export function ChatWidget() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend(input)}
-              placeholder="Ask anything about vibe coding…"
+              placeholder="Ask anything…"
               className="flex-1 bg-transparent text-[14px] text-[#1b1b1b] placeholder:text-[#aaa] outline-none"
               disabled={isLoading}
             />
